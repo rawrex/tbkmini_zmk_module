@@ -1,0 +1,11 @@
+if SHIELD_K1AVA_RIGHT
+    config ZMK_KEYBOARD_NAME
+        default "k1ava"
+    config ZMK_SPLIT_ROLE_CENTRAL
+        default y
+endif
+
+if SHIELD_K1AVA_LEFT || SHIELD_K1AVA_RIGHT
+    config ZMK_SPLIT
+        default y
+endif
