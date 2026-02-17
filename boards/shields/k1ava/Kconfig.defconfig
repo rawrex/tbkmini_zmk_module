@@ -1,4 +1,4 @@
-if SHIELD_K1AVA_RIGHT
+if SHIELD_K1AVA_LEFT
     config ZMK_KEYBOARD_NAME
         default "k1ava"
     config ZMK_SPLIT_ROLE_CENTRAL
