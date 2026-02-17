@@ -1,7 +1,5 @@
 config SHIELD_K1AVA_LEFT
     def_bool $(shields_list_contains,k1ava_left)
-    select SHIELD_K1AVA
 
 config SHIELD_K1AVA_RIGHT
     def_bool $(shields_list_contains,k1ava_right)
-    select SHIELD_K1AVA
