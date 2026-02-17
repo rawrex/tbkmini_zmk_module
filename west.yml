@@ -1,8 +1,0 @@
-manifest:
-  remotes:
-    - name: rawrex
-      url-base: https://github.com/rawrex
-  projects:
-    - name: k1ava
-      remote: rawrex
-      import: west.yml
