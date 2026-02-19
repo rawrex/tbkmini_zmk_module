@@ -1,4 +1,4 @@
-#include <behaviors.dtsi>
+// Note, to use with Miryoku, this file needs to be deleted to not override Miryoku's keymap
 #include <dt-bindings/zmk/keys.h>
 
 / {
