@@ -1,0 +1,110 @@
+// A Myroku inspired keymap design
+// Based on the work of cwebster2/zmk-config
+// Put it in place of the default keymap into the boards/shields/tbkmini
+
+#include <behaviors.dtsi>
+#include <dt-bindings/zmk/keys.h>
+#include <dt-bindings/zmk/bt.h>
+
+#define DEFAULT 0
+#define NUM 1
+#define SYM 2
+#define FUN 3
+#define NAV 4
+#define MSE 5
+#define MED 6
+
+&lt {
+    tapping-term-ms = <300>;
+    quick_tap_ms = <200>;
+    flavor = "hold-preferred";
+};
+
+&caps_word {
+    continue-list = <UNDERSCORE MINUS BACKSPACE DELETE>;
+};
+
+/ {
+    chosen {
+        zmk,matrix_transform = &default_transform;
+    };
+
+    behaviors {
+        hm: homerow_mods {
+            compatible = "zmk,behavior-hold-tap";
+            label = "HOMEROW_MODS";
+            #binding-cells = <2>;
+            tapping-term-ms = <150>;
+            quick_tap_ms = <150>;
+            flavor = "tap-preferred";
+            bindings = <&kp>, <&kp>;
+        };
+        u_caps_word: u_caps_word {
+            compatible = "zmk,behavior-mod-morph";
+            label = "u_caps_word";
+            #binding-cells = <0>;
+            bindings = <&caps_word>, <&kp CAPS>;
+            mods = <(MOD_LSFT|MOD_RSFT)>;
+        };
+    };
+
+    keymap {
+        compatible = "zmk,keymap";
+        default_layer {
+            bindings = <
+                &none  &kp Q      &kp W      &kp F       &kp P         &kp B       /* split */  &kp J       &kp L        &kp U       &kp Y      &kp SQT    &none
+                &none  &hm LGUI A &hm LALT R &hm LCTRL S &hm LSHFT T   &kp G       /* split */  &kp M       &hm RSHFT N  &hm RCTRL E &hm LALT I &hm RGUI O &none
+                &none  &kp Z      &kp X      &kp C       &kp D         &kp V       /* split */  &kp K       &kp H        &kp COMMA   &kp DOT    &kp FSLH   &none
+                                             &lt MSE ESC &lt NAV SPACE &lt NUM TAB /* split */  &lt NUM RET &lt SYM BSPC &lt MED DOT
+            >;
+        };
+        num_layer {
+            bindings = <
+                &trans &kp BSLH   &kp AMPS   &kp TILDE   &kp GRAVE     &none       /* split */  &kp K_LOCK &kp N1        &kp N2      &kp N3     &sys_reset &trans
+                &trans &kp CARET  &kp PIPE   &kp STAR    &kp DLLR      &none       /* split */  &trans     &kp N4        &kp N5      &kp N6     &kp RGUI   &trans
+                &trans &kp QMARK  &kp LBKT   &kp AT      &kp RBKT      &none       /* split */  &trans     &kp N7        &kp N8      &kp N9     &trans     &trans
+                                             &trans      &kp SEMI      &kp COLON   /* split */  &trans     &kp N0        &trans      
+            >;
+        };
+        sym_layer {
+            bindings = <
+                &trans &none      &kp LT     &kp MINUS   &kp GT        &none       /* split */  &kp K_LOCK &trans        &trans      &trans     &sys_reset &trans
+                &trans &kp EXCL   &kp LPAR   &kp PRCNT   &kp RPAR      &none       /* split */  &trans     &kp RSHFT     &kp RCTRL   &kp LALT   &kp RGUI   &trans
+                &trans &kp HASH   &kp LBRC   &kp PLUS    &kp RBRC      &none       /* split */  &trans     &trans        &trans      &trans     &trans     &trans
+                                             &kp DQT     &kp EQUAL     &kp UNDER   /* split */  &trans     &trans        &trans
+            >;
+        };
+        fun_layer {
+            bindings = <
+                &none &kp F12 &kp F7 &kp F8 &kp F9 &kp SYSREQ        &kp K_LOCK &trans  &trans     &trans   &bootloader &none
+                &none &kp F11 &kp F4 &kp F5 &kp F6 &kp PRINTSCREEN   &trans &kp RSHFT  &kp RCTRL  &kp LALT  &kp RGUI &none
+                &none &kp F10 &kp F1 &kp F2 &kp F3 &kp PAUSE_BREAK   &trans &trans  &trans &trans &trans &none
+                                  &kp K_APP   &kp SPACE   &kp TAB     &trans &trans &trans
+            >;
+        };
+        nav_layer {
+            bindings = <
+                &none &sys_reset   &trans   &trans    &trans     &kp K_LOCK   &kp K_UNDO &kp K_CUT &kp K_COPY &kp K_PASTE &kp K_AGAIN &none
+                &none &kp LGUI &kp LALT &kp LCTRL &kp LSHFT &trans       &kp LEFT   &kp DOWN  &kp UP     &kp RIGHT   &u_caps_word &none
+                &none &trans   &trans   &trans    &trans     &trans       &kp HOME   &kp PG_DN &kp PG_UP  &kp END     &kp INS &none
+                                  &trans   &trans   &trans                 &kp RET &kp BSPC &kp DEL
+            >;
+        };
+        mse_layer {
+            bindings = <
+                &none &sys_reset   &trans   &trans    &trans     &kp K_LOCK   &bt BT_SEL 0 &bt BT_SEL 1 &bt BT_SEL 2 &bt BT_SEL 3 &bt BT_SEL 4 &none
+                &none &kp LGUI &kp LALT &kp LCTRL &kp LSHFT &trans       &trans &trans &trans &trans &trans &none
+                &none &trans   &trans   &trans    &trans     &trans       &trans &trans &trans &trans &bt BT_CLR &none
+                                  &trans   &trans   &trans                 &trans &trans &trans
+            >;
+        };
+        med_layer {
+            bindings = <
+                &none &bootloader   &trans   &trans    &trans     &kp K_LOCK   &trans &trans     &trans       &trans       &trans &none
+                &none &kp LGUI &kp LALT &kp LCTRL &kp LSHFT &trans       &trans &kp K_PREV &kp K_VOL_DN &kp K_VOL_UP &kp K_NEXT &none
+                &none &trans   &trans   &trans    &trans     &trans       &trans &trans     &trans       &trans       &trans &none
+                                  &trans   &trans   &trans                 &kp K_STOP2 &kp K_PP &kp K_MUTE
+            >;
+        };
+    };
+};
