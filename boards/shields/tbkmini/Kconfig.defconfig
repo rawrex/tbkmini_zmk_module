@@ -16,4 +16,10 @@ if SHIELD_TBKMINI_LEFT || SHIELD_TBKMINI_RIGHT
         default 300000
     config ZMK_MOUSE
         default y
+    config BT_PERIPHERAL_PREF_MIN_INT
+        default 24
+    config BT_PERIPHERAL_PREF_MAX_INT
+        default 48
+    config ZMK_IDLE_SLEEP_TIMEOUT
+        default 600000
 endif
