@@ -18,6 +18,6 @@ if SHIELD_TBKMINI_LEFT || SHIELD_TBKMINI_RIGHT
         default y
     config ZMK_IDLE_SLEEP_TIMEOUT
         default 300000
-#    config ZMK_MOUSE
-#        default y
+    config ZMK_MOUSE
+        default y
 endif
