@@ -1,6 +1,4 @@
 if SHIELD_TBKMINI_LEFT
-    config ZMK_USB # Explicit usb support for the central part
-        default y
     config ZMK_KEYBOARD_NAME
         default "tbkmini"
     config ZMK_SPLIT_ROLE_CENTRAL
@@ -8,8 +6,6 @@ if SHIELD_TBKMINI_LEFT
 endif
 
 if SHIELD_TBKMINI_LEFT || SHIELD_TBKMINI_RIGHT
-    config ZMK_USB # Explicit off
-        default n
     config ZMK_BLE # Needs to be explicit
         default y
     config ZMK_SPLIT
